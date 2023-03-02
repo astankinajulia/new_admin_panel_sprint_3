@@ -1,0 +1,32 @@
+version: '3'
+services:
+
+  etl:
+    image: elasticsearch:7.17.9
+    environment:
+      - discovery.type=single-node
+      - bootstrap.memory_lock=true
+      - cluster.routing.allocation.disk.threshold_enabled=false
+    volumes:
+      - etl_data:/usr/share/elasticsearch/data
+    env_file:
+      - ./config/.env
+
+  redis:
+    image: redis:7.0.8
+    volumes:
+      - redis:/usr/local/etc/redis/
+    env_file:
+      - ./config/.env
+
+  app:
+    build: .
+    depends_on:
+      - etl
+      - redis
+    env_file:
+      - ./config/.env
+
+volumes:
+  etl_data:
+  redis:

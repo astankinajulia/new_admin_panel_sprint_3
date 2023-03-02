@@ -1,5 +1,11 @@
 # Проектное задание: ETL
 
+1) Запуск командой `docker-compose up -d --build`
+2) Для локальной разработки выполнить   
+`docker-compose build`  
+`docker-compose -f docker-compose.yml -f docker-compose.dev.yml up`
+
+
 ## Задание спринта
 
 Написать отказоустойчивый перенос данных из Postgres в Elasticsearch
