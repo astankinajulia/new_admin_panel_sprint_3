@@ -1,5 +1,6 @@
+from __future__ import annotations
+
 from pydantic import BaseModel
-from typing import List, Optional
 
 
 class BaseClass(BaseModel):
@@ -11,12 +12,12 @@ class Person(BaseClass):
 
 
 class FilmWork(BaseClass):
-    imdb_rating: Optional[float]
+    imdb_rating: float | None
     title: str
-    genre: List[str]
-    description: Optional[str]
-    director: List[str]
-    actors_names: List[str]
-    writers_names: List[str]
-    actors: List[Person]
-    writers: List[Person]
+    genre: list[str]
+    description: str | None
+    director: list[str]
+    actors_names: list[str]
+    writers_names: list[str]
+    actors: list[Person]
+    writers: list[Person]
