@@ -83,9 +83,9 @@ class PostgresExtractor:
         """ Запрос на получение "модифицированных"  фильмов. """
         logger.info(f'Select filmworks, {self.modified_time}')
         self.cursor.execute(
-            f'{SQL_SELECT_PART} {FROM_FILMWORKS} {JOIN_FOR_FILMWORKS}'
-            f"WHERE fw.modified > '{self.modified_time}'"
-            'GROUP BY fw.id, fw.modified'
+            f'{SQL_SELECT_PART} {FROM_FILMWORKS} {JOIN_FOR_FILMWORKS} '
+            f"WHERE fw.modified > '{self.modified_time}' "
+            'GROUP BY fw.id, fw.modified '
             'ORDER BY fw.modified;'
 
         )
@@ -94,8 +94,8 @@ class PostgresExtractor:
         """ Запрос на получение "модифицированных"  жанров. """
         logger.info(f'Select genres, {self.modified_time}')
         self.cursor.execute(
-            f'{SQL_SELECT_PART} {FROM_GENRES} {JOIN_FOR_GENRES}'
-            f"'WHERE g.modified > '{self.modified_time}'"
+            f'{SQL_SELECT_PART} {FROM_GENRES} {JOIN_FOR_GENRES} '
+            f"WHERE g.modified > '{self.modified_time}' "
             'GROUP BY fw.id;'
         )
 
@@ -103,8 +103,8 @@ class PostgresExtractor:
         """ Запрос на получение "модифицированных" людей. """
         logger.info(f'Select persons, {self.modified_time}')
         self.cursor.execute(
-            f'{SQL_SELECT_PART} {FROM_PERSONS} {JOIN_FOR_PERSONS}'
-            f"WHERE p.modified > '{self.modified_time}'"
+            f'{SQL_SELECT_PART} {FROM_PERSONS} {JOIN_FOR_PERSONS} '
+            f"WHERE p.modified > '{self.modified_time}' "
             'GROUP BY fw.id;'
         )
 
