@@ -1,8 +1,6 @@
-import logging
 import logging.config
 from typing import Iterator
 
-from psycopg2.extensions import connection as _connection
 from pydantic import ValidationError
 
 from schemas import FilmWork, Person
@@ -72,12 +70,11 @@ logger = logging.getLogger(__name__)
 class PostgresExtractor:
     """ Чтение данных из postgreSQL пачками. """
 
-    def __init__(self, connection: _connection, modified_time: str, pack_size: int = PACK_SIZE):
+    def __init__(self, pg_curs, modified_time: str, pack_size: int = PACK_SIZE):
         self.pack_size = pack_size
         self.modified_time = modified_time
 
-        self.connection = connection
-        self.cursor = connection.cursor()
+        self.cursor = pg_curs
 
     def get_filmworks(self):
         """ Запрос на получение "модифицированных"  фильмов. """

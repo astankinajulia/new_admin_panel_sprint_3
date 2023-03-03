@@ -104,7 +104,8 @@ if __name__ == '__main__':
     ) as pg_conn, pg_conn.cursor() as pg_curs, es_connector(**settings.get_es_settings()) as es_conn:
         es = ElasticsearchLoader(es_conn)
         data_transformer: DataTransform = DataTransform(ETL_INDEX_NAME)
-        pg_extractor: PostgresExtractor = PostgresExtractor(pg_conn, state.get_state('modified'), PACK_SIZE)
+        pg_extractor: PostgresExtractor = PostgresExtractor(pg_curs, state.get_state('modified'), PACK_SIZE)
+
         logger.info('Start ETL process')
         while True:
             try:
